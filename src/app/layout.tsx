@@ -1,10 +1,51 @@
 import type { Metadata } from "next";
 import "./globals.css";
+
 import Navbar from "@/components/Navbar";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 import PageTransition from "@/components/PageTransition";
 import Footer from "@/components/Footer";
-import { Outfit, Space_Grotesk, Syne, JetBrains_Mono } from "next/font/google";
+
+import {
+  Outfit,
+  Space_Grotesk,
+  Syne,
+  JetBrains_Mono,
+} from "next/font/google";
+
+export const metadata: Metadata = {
+  metadataBase: new URL("https://karamjeetsony.akarta.tech"),
+
+  title: "Karamjeet Sony | Software Engineer",
+
+  description:
+    "Karamjeet Sony is a Software Engineer focused on backend engineering, distributed systems, scalable systems, and competitive programming.",
+
+  alternates: {
+    canonical: "https://karamjeetsony.akarta.tech",
+  },
+
+  openGraph: {
+    title: "Karamjeet Sony | Software Engineer",
+    description:
+      "Portfolio of Karamjeet Sony, Software Engineer.",
+    url: "https://karamjeetsony.akarta.tech",
+    siteName: "Karamjeet Sony",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Karamjeet Sony | Software Engineer",
+    description:
+      "Portfolio of Karamjeet Sony, Software Engineer.",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -34,17 +75,11 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "Karamjeet Sony — Full Stack Developer",
-  description:
-    "Full Stack Developer building reliable backend systems and modern web products.",
-};
-
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -56,12 +91,17 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
+
       <body
         className={`${outfit.variable} ${spaceGrotesk.variable} ${syne.variable} ${jetbrainsMono.variable}`}
       >
         <SmoothScrollProvider>
           <Navbar />
-          <PageTransition>{children}</PageTransition>
+
+          <PageTransition>
+            {children}
+          </PageTransition>
+
           <Footer />
         </SmoothScrollProvider>
       </body>
